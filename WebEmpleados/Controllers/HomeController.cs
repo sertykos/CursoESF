@@ -12,10 +12,9 @@ namespace WebEmpleados.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            using (var db = new EmpleadosEntities())
-            {
-                return View(db.Empleados.ToList());
-            }          
+            var db = new EmpleadosEntities();
+
+            return View(db.Empleados.ToList());                 
         }
 
         public ActionResult Alta()
@@ -37,5 +36,17 @@ namespace WebEmpleados.Controllers
             }
             return View(model);
         }
+
+        [HttpPost]
+        public ActionResult Buscar()
+        {
+            var bus = Request.Form["busqueda"];
+
+            var db = new EmpleadosEntities();
+
+            var al = db.Empleados.Where(o => o.Cargos.nombre.Contains(bus));
+            return View(al);
+        }
+
     }
 }

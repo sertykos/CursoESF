@@ -4,7 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="EmpleadosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="EmpleadosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cargos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Empleados">
           <Key>
             <PropertyRef Name="dni" />
@@ -12,15 +19,31 @@
           <Property Name="dni" Type="nvarchar" MaxLength="9" Nullable="false" />
           <Property Name="nombre" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="apellidos" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="cargo" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="idCargo" Type="int" Nullable="false" />
           <Property Name="salario" Type="float" Nullable="false" />
           <Property Name="fechaAlta" Type="date" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Empleados_Cargos">
+          <End Role="Cargos" Type="Self.Cargos" Multiplicity="1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="idCargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="EmpleadosModelStoreContainer">
+          <EntitySet Name="Cargos" EntityType="Self.Cargos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Empleados" EntityType="Self.Empleados" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Empleados_Cargos" Association="Self.FK_Empleados_Cargos">
+            <End Role="Cargos" EntitySet="Cargos" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EmpleadosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -31,13 +54,39 @@
           <Property Name="dni" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="apellidos" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="cargo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="salario" Type="Double" Nullable="false" />
           <Property Name="fechaAlta" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="idCargo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cargos" Relationship="EmpleadosModel.FK_Empleados_Cargos" FromRole="Empleados" ToRole="Cargos" />
         </EntityType>
         <EntityContainer Name="EmpleadosEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Empleados" EntityType="Self.Empleados" />
+          <EntitySet Name="Cargos" EntityType="EmpleadosModel.Cargos" />
+          <AssociationSet Name="FK_Empleados_Cargos" Association="EmpleadosModel.FK_Empleados_Cargos">
+            <End Role="Cargos" EntitySet="Cargos" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Cargos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Empleados" Relationship="EmpleadosModel.FK_Empleados_Cargos" FromRole="Cargos" ToRole="Empleados" />
+        </EntityType>
+        <Association Name="FK_Empleados_Cargos">
+          <End Type="EmpleadosModel.Cargos" Role="Cargos" Multiplicity="1" />
+          <End Type="EmpleadosModel.Empleados" Role="Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="idCargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -47,12 +96,20 @@
           <EntitySetMapping Name="Empleados">
             <EntityTypeMapping TypeName="EmpleadosModel.Empleados">
               <MappingFragment StoreEntitySet="Empleados">
+                <ScalarProperty Name="idCargo" ColumnName="idCargo" />
                 <ScalarProperty Name="dni" ColumnName="dni" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="apellidos" ColumnName="apellidos" />
-                <ScalarProperty Name="cargo" ColumnName="cargo" />
                 <ScalarProperty Name="salario" ColumnName="salario" />
                 <ScalarProperty Name="fechaAlta" ColumnName="fechaAlta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cargos">
+            <EntityTypeMapping TypeName="EmpleadosModel.Cargos">
+              <MappingFragment StoreEntitySet="Cargos">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

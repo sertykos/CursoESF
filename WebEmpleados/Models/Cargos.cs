@@ -12,15 +12,16 @@ namespace WebEmpleados.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Empleados
+    public partial class Cargos
     {
-        public string dni { get; set; }
-        public string nombre { get; set; }
-        public string apellidos { get; set; }
-        public double salario { get; set; }
-        public System.DateTime fechaAlta { get; set; }
-        public int idCargo { get; set; }
+        public Cargos()
+        {
+            this.Empleados = new HashSet<Empleados>();
+        }
     
-        public virtual Cargos Cargos { get; set; }
+        public int id { get; set; }
+        public string nombre { get; set; }
+    
+        public virtual ICollection<Empleados> Empleados { get; set; }
     }
 }

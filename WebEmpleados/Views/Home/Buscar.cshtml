@@ -1,18 +1,13 @@
 ﻿@model IEnumerable<WebEmpleados.Models.Empleados>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Buscar";
 }
 
-<h2>Index</h2>
-
-<form action="/Home/Buscar" method="POST">
-    <input type="text" name="busqueda" placeholder="Buscar" />
-    <input type="submit" value="Ok" />
-</form>
+<h2>Buscar</h2>
 
 <p>
-    @Html.ActionLink("Nuevo Empleado", "Alta")
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
@@ -26,16 +21,16 @@
             @Html.DisplayNameFor(model => model.apellidos)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.idCargo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cargos.nombre)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.salario)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.fechaAlta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idCargo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cargos.nombre)
         </th>
         <th></th>
     </tr>
@@ -52,16 +47,16 @@
             @Html.DisplayFor(modelItem => item.apellidos)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.idCargo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cargos.nombre)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.salario)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.fechaAlta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idCargo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cargos.nombre)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
