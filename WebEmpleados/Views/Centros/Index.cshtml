@@ -1,0 +1,27 @@
+﻿@model IEnumerable<WebEmpleados.Models.Centros>
+@{
+    ViewBag.Title = "Index";
+    bool par = false;
+}
+
+<h2 style="color: white;">Listado de centros</h2>
+
+@foreach (var item in Model)
+{
+    <div style="@(par ? "background:#3366FF;" : "background:#6699FF;");" class="divCentros">
+
+        <img class="imgCentros" src="https://mspartner.microsoft.com/es/SiteCollectionImages/ESF_group_logo.png" />
+        <h3 class="centroNombre">Centro: @item.nombre</h3>
+        <h4 class="centroDireccion">Direccion: @item.direccion</h4>
+        <h4 class="centroEmpleadosTexto">Empleados en el centro</h4>
+        <ul class="centroEmpleadosLista">
+            
+            @foreach (var empleado in item.Empleados)
+            {
+                <li>@empleado.nombre @empleado.apellidos - Cargo: @empleado.Cargos.nombre</li>
+            }
+        </ul>
+
+    </div>
+    par = !par;
+}

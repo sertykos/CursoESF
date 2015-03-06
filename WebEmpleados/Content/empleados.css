@@ -1,0 +1,37 @@
+﻿body {
+    background: url(http://lunar.thegamez.net/yardlandscaping/landscaping-website/blue-retro-pattern-twitter-background-twitter-backgrounds-1920x1024.jpg);
+}
+.divCentros {
+    padding-left: 20px;
+    padding-top: 10px;
+    width: 100%;
+    float: left;
+    margin-bottom: 8px;
+    position: relative;
+    box-shadow: 1px 1px 14px #E0E0E0;
+}
+.centroNombre {
+    font-family: monospace;
+}
+.centroDireccion {
+    color: antiquewhite;
+font-style: italic;
+}
+.centroEmpleadosTexto {
+    font-size: 16px;
+font-family: monospace;
+}
+.centroEmpleadosLista {
+    font-weight: bold;
+background-color: beige;
+box-shadow: inset 1px 1px 7px;
+width: 90%;
+padding-top: 10px;
+padding-bottom: 10px;
+}
+
+.imgCentros {
+   position: absolute;
+right: 10px;
+    opacity: 0.7;
+}
