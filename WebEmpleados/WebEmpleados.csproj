@@ -90,6 +90,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\cargos.css" />
     <Content Include="Content\empleados.css" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -114,6 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CargosController.cs" />
     <Compile Include="Controllers\CentrosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -171,6 +173,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Buscar.cshtml" />
     <Content Include="Views\Centros\Index.cshtml" />
+    <Content Include="Views\Cargos\Cargos_Index.cshtml" />
+    <Content Include="Views\Cargos\Add.cshtml" />
+    <Content Include="Views\Cargos\Editar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

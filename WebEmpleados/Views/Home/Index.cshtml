@@ -6,69 +6,79 @@
 
 <h2>Index</h2>
 
+<div>
+    <!--<a href="/Cargos/Cargos_Index">Cargos</a>-->
+    <!--<a href="/Centros/Index">Centros</a>-->
+    @Html.ActionLink("Cargos", "Cargos_Index", "Cargos")
+    @Html.ActionLink("Centros", "Index", "Centros") <!--Texto, Accion, Controlador-->
+</div>
+
 <form action="/Home/Buscar" method="POST">
     <input type="text" name="busqueda" placeholder="Buscar" />
     <input type="submit" value="Ok" />
 </form>
 
-<p>
-    @Html.ActionLink("Nuevo Empleado", "Alta")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.dni)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.apellidos)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.idCargo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cargos.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.salario)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fechaAlta)
-        </th>
-        <th></th>
-    </tr>
+<div style="background-color: rgba(255, 255, 255, 0.7)">
+    <p>
+        @Html.ActionLink("Nuevo Empleado", "Alta")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.dni)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.apellidos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.idCargo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cargos.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.salario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fechaAlta)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.dni)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.apellidos)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.idCargo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cargos.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.salario)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fechaAlta)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dni)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.apellidos)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.idCargo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cargos.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.salario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fechaAlta)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new {/* id=item.PrimaryKey */}) |
+                    @Html.ActionLink("Details", "Details", new {/* id=item.PrimaryKey */}) |
+                    @Html.ActionLink("Delete", "Delete", new {/* id=item.PrimaryKey */})
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+</div>

@@ -1,0 +1,25 @@
+﻿@model WebEmpleados.Models.Cargos
+@{
+    ViewBag.Title = "Editar";
+}
+
+<h2>Editar cargo</h2>
+
+<div style="background-color: rgba(255,255,255,0.7)">
+    
+    @Html.ValidationSummary(false)
+
+    @using (Html.BeginForm())
+    {
+
+        @Html.HiddenFor(o => o.id)
+        <!--Escondemos el id ya que sin el luego no podria validar-->
+
+        @Html.LabelFor(o => o.nombre)
+        @Html.EditorFor(o => o.nombre)
+        <br/>
+
+        <input type="submit" value="Editar cargo"/>
+    }
+
+</div>

@@ -1,0 +1,35 @@
+﻿@model IEnumerable<WebEmpleados.Models.Cargos>
+@{
+    ViewBag.Title = "Cargos_Index";
+    bool par = false;
+}
+
+<h2>Lista de cargos</h2>
+
+@Html.ActionLink("Añadir cargo", "Add", null, new { @class = "cargos_link" })
+
+@foreach (var item in Model)
+{
+    <div style="@(par ? "background:#3366FF;" : "background:#6699FF;");">
+
+        <h2>@item.nombre</h2>
+        <h4>Empleados:</h4>
+
+        @foreach (var empleado in item.Empleados)
+        {
+            <ul>
+                <li>@empleado.nombre @empleado.apellidos (@empleado.dni)</li>
+            </ul>
+        }
+
+        <div>
+
+            @Html.ActionLink("Editar cargo", "Editar", new { id = item.id }, new { @class = "cargos_link" })
+            @Html.ActionLink("Eliminar cargo", "Eliminar", new { id = item.id }, new { @class = "cargos_link" })
+
+        </div>
+
+    </div>
+
+    par = !par;
+}
