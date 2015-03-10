@@ -4,13 +4,13 @@
     bool par = false;
 }
 
-<h2>Lista de cargos</h2>
+<h2 style="color: white; margin-bottom: 20px;">Lista de cargos</h2>
 
-@Html.ActionLink("Añadir cargo", "Add", null, new { @class = "cargos_link" })
+@Html.ActionLink("Añadir cargo", "Add", null, new { @class = "cargos_link", @style = "font-size: 18px" })
 
 @foreach (var item in Model)
 {
-    <div style="@(par ? "background:#3366FF;" : "background:#6699FF;");">
+    <div style="@(par ? "background:#3366FF;" : "background:#6699FF;");" class="cargos_sections">
 
         <h2>@item.nombre</h2>
         <h4>Empleados:</h4>
@@ -22,14 +22,14 @@
             </ul>
         }
 
-        <div>
+        <div style="position: relative;">
 
             @Html.ActionLink("Editar cargo", "Editar", new { id = item.id }, new { @class = "cargos_link" })
-            @Html.ActionLink("Eliminar cargo", "Eliminar", new { id = item.id }, new { @class = "cargos_link" })
+            @Html.ActionLink("Eliminar cargo", "Eliminar", new { id = item.id }, new { @class = "cargos_link link_eliminar" })
 
         </div>
 
     </div>
 
-    par = !par;
+        par = !par;
 }

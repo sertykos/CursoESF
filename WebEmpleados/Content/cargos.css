@@ -1,3 +1,13 @@
 ﻿.cargos_link {
     color: white;
 }
+.cargos_sections {
+    padding: 5px;
+margin-bottom: 20px;
+border: 4px ridge grey;
+}
+
+.link_eliminar {
+    position: absolute;
+    right: 10px;
+}

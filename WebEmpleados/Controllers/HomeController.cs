@@ -10,6 +10,9 @@ namespace WebEmpleados.Controllers
     public class HomeController : Controller
     {
         // GET: Home
+
+        private EmpleadosEntities db = new EmpleadosEntities();
+
         public ActionResult Index()
         {
             var db = new EmpleadosEntities();
@@ -19,6 +22,9 @@ namespace WebEmpleados.Controllers
 
         public ActionResult Alta()
         {
+            ViewBag.idCargo = new SelectList(db.Cargos, "id", "nombre");
+            ViewBag.idCentros = new MultiSelectList(db.Centros, "id", "nombre");
+
             return View(new Empleados());
         }
 
@@ -27,12 +33,17 @@ namespace WebEmpleados.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (var db = new EmpleadosEntities())
-                {
                     db.Empleados.Add(model);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+
+                foreach (var idCentro in model.idCentros)
+                {
+                    var c = db.Centros.Find(idCentro);
+                    model.Centros.Add(c);
                 }
+
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
             }
             return View(model);
         }

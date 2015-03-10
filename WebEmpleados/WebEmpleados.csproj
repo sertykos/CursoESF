@@ -92,6 +92,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\cargos.css" />
     <Content Include="Content\empleados.css" />
+    <Content Include="Content\index.css" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -128,6 +129,7 @@
     <Compile Include="Models\Centros.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\centrosMios.cs" />
     <Compile Include="Models\Empleados.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
